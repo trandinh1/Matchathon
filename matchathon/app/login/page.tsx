@@ -23,6 +23,8 @@ const LoginPage = () => {
         const data = await response.json();
         if (!response.ok) throw new Error(data.message);
         
+        localStorage.setItem("userEmail", email);
+
         router.push(`/profile?email=${encodeURIComponent(email)}`);
       } catch (err: any) {
         setError(err.message);

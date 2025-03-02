@@ -6,7 +6,7 @@ import { Navbar } from "@/components/navbar";
 
 export default function MatchPage() {
   const searchParams = useSearchParams();
-  const email = searchParams.get("email"); // ✅ Extract email from URL
+  const email = searchParams.get("email"); // Extract email from URL
 
   if (!email) {
     return <p className="text-red-500 text-center">No email provided in the URL</p>;
