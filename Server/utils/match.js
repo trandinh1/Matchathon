@@ -26,30 +26,31 @@ async function findTopMatch(userEmail) {
     const user = await db.collection("Users").findOne({ email: userEmail });
 
     if (!user) {
-        console.error(" User not found:", userEmail);
+        console.error("User not found:", userEmail);
         return { message: "User not found" };
     }
 
-    const userSkills = user.skills && Array.isArray(user.skills) ? user.skills : [];
-    const userInterests = user.interests && Array.isArray(user.interests) ? user.interests : [];
-    const userHackathons = user.hacklist && Array.isArray(user.hacklist) ? user.hacklist : [];
+    const userSkills = user.skills || [];
+    const userInterests = user.interests || [];
+    const userHackathons = user.hacklist || [];
+    const userMatchedWith = user.matchedWith || []; // Existing matches
 
     if (userSkills.length === 0 || userInterests.length === 0 || userHackathons.length === 0) {
         return { message: "User does not have enough profile information for matching." };
     }
 
-    // Find users attending at least one of the same hackathons
+    // ✅ Find users attending the same hackathons, but NOT already matched
     const otherUsers = await db.collection("Users").find({
-        email: { $ne: userEmail }, // Exclude self
+        email: { $ne: userEmail, $nin: userMatchedWith }, // Exclude self and existing matches
         hacklist: { $in: userHackathons } // Match overlapping hackathons
     }).toArray();
 
-    if (otherUsers.length === 0) return { message: "No other users attending the same hackathons." };
+    if (otherUsers.length === 0) return { message: "No other users available for matching." };
 
     const filteredUsers = otherUsers.filter(u => u.skills && u.interests);
     if (filteredUsers.length === 0) return { message: "No suitable matches found with overlapping hackathons." };
 
-    // Constructing the input prompt with filtered users
+    // Construct input prompt for Gemini
     const inputPrompt = `
     I need to find the **best match** for a hackathon participant based on **similar interests** but **complementary skills**.
 
@@ -59,7 +60,7 @@ async function findTopMatch(userEmail) {
     - Interests: ${userInterests.join(", ")}
     - Attending Hackathons: ${userHackathons.join(", ")}
 
-    **Potential Matches (Only Users Attending the Same Hackathons):**
+    **Potential Matches (Only Users Attending the Same Hackathons & Not Previously Matched):**
     ${filteredUsers.map((u, index) => `
     Match ${index + 1}:
     - Name: ${u.firstName || "Unknown"} ${u.lastName || ""}
@@ -73,6 +74,7 @@ async function findTopMatch(userEmail) {
     - The match must be attending at least one of the same hackathons as the user.
     - The match must have at least **one common interest** with the user.
     - The match should have **different but complementary skills**.
+    - The match should NOT be a person the user has already matched with.
     - Example: If the user specializes in Backend, match them with someone skilled in Frontend or UI/UX.
     - Form a **balanced hackathon team covering different skill sets**.
 
@@ -108,9 +110,10 @@ async function findTopMatch(userEmail) {
 
         return bestMatch;
     } catch (error) {
-        console.error(" Error in Gemini API:", error);
+        console.error("Error in Gemini API:", error);
         return { message: "Error in finding a match" };
     }
 }
 
 module.exports = { findTopMatch };
+
