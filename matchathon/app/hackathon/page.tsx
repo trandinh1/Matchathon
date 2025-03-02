@@ -78,7 +78,7 @@ export default function HackathonsPage() {
   return (
     <div className="w-full flex h-screen ">
       <Navbar />
-    <div className="bg-[#f1f9ef] min-h-screen flex flex-col items-center p-6">
+    <div className="bg-[#f1f9ef] w-full min-h-screen flex flex-col items-center p-6">
       <h2 className="text-3xl font-bold text-[#5a7d5a] mt-6">
         Upcoming Hackathons
       </h2>

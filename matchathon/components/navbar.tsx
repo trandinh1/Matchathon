@@ -58,7 +58,7 @@ export const Navbar = () => {
                 <h1 className="text-2xl font-bold text-white">Matchathon</h1>
                 <div className="w-[184px] h-64 flex-col justify-center items-start gap-1 flex">
                     <div className="w-[184px] h-12 p-3 bg-[#f1f9ef] p-3 rounded-md shadow-sm hover:bg-green-200">
-                        <Link href="/profile" className="flex items-center gap-3">
+                        <Link href={`/profile?email=${encodeURIComponent(userEmail)}`} className="flex items-center gap-3">
                             <User size={20} />
                             <div className="text-lg font-semibold text-black">
                                Profile 

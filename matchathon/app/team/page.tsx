@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Navbar } from "@/components/navbar";
 
 interface User {
   email: string;
@@ -51,7 +52,9 @@ export default function TeamPage() {
     );
 
   return (
-    <div className="bg-[#e6f0e6] min-h-screen flex flex-col items-center">
+    <div className="w-full flex h-screen ">
+          <Navbar />
+    <div className="bg-[#e6f0e6] w-full min-h-screen flex flex-col items-center">
       <h2 className="text-3xl font-bold mt-6 text-[#3e6247]">Your Team</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
@@ -61,7 +64,7 @@ export default function TeamPage() {
             className="bg-[#d9e8c5] shadow-lg rounded-lg p-6 w-64 text-center"
           >
             <img
-              src={`/images/avatar${Math.floor(Math.random() * 3) + 1}.jpg`}
+              src={`/images/image${Math.floor(Math.random() * 3) + 1}.jpg`}
               alt={member.firstName}
               className="w-24 h-24 rounded-full mx-auto border-4 border-[#b0c9a1] shadow-md"
             />
@@ -103,7 +106,7 @@ export default function TeamPage() {
               className="mt-3 block"
             >
               <img
-                src="/linkedin-icon.png"
+                src="/images/linkedin_icon.png"
                 alt="LinkedIn"
                 className="w-6 h-6 mx-auto opacity-80 hover:opacity-100 transition"
               />
@@ -111,6 +114,7 @@ export default function TeamPage() {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 }
