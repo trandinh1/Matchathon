@@ -12,6 +12,8 @@ const ProfilePage = () => {
   const [error, setError] = useState(null);
   const searchParams = useSearchParams(); 
   const email = searchParams.get("email");
+  const randomImageNumber = Math.floor(Math.random() * 3) + 1;
+  const imageSrc = `/images/image${randomImageNumber}.jpg`;
 
   const router = useRouter();
 
@@ -45,15 +47,18 @@ const ProfilePage = () => {
     <div className="flex h-screen bg-gray-100">
       <Navbar />
       <div className="flex flex-col w-full items-center p-6">
-        <div className="w-3/4 bg-green-100 p-6 rounded-xl shadow-lg text-center">
+        <div className="w-3/4 bg-green-100 p-6 rounded-xl shadow-lg text-align: left">
         <img
-            src={user.image || "/default-avatar.png"}
+            src={imageSrc}
             alt={user.firstName || "User"}
             className="w-40 h-40 rounded-full border-4 border-white shadow-md mr-6"
           />
           <div>
             <h2 className="text-black text-2xl font-normal font-['Jua']">{user.firstName || "First Name"} {user.lastName || "Last Name"}</h2>
             <p className="text-black text-2xl font-normal font-['Jua']">{user.email || "No email provided"}</p>
+            <p className="text-black text-2xl font-normal font-['Jua']">{user.location || "N/A"}</p>
+            <p className="text-black text-2xl font-normal font-['Jua']">{user.affiliatedWith || "N/A"}</p>
+            <p className="text-black text-2xl font-normal font-['Jua']">{user.linkedin || ""}</p>
           </div>
         </div>
         <div className="w-3/4 mt-6 p-6 bg-green-100 rounded-xl shadow-md">
