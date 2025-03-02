@@ -7,6 +7,8 @@ const { connectDB } = require("./db");
 const authRoutes = require("./routes/auth");
 const profileRoutes = require("./routes/profile");
 const hackathonRoutes = require("./routes/hackathon");
+const matchRoutes = require("./routes/match");
+
 
 const app = express();
 
@@ -21,6 +23,7 @@ connectDB();
 app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/hackathons", hackathonRoutes);
+app.use("/api/match", matchRoutes);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
