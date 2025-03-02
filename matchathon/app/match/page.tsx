@@ -9,17 +9,14 @@ export default function MatchPage() {
   const email = searchParams.get("email"); // Extract email from URL
 
   if (!email) {
-    return <p className="text-red-500 text-center">No email provided in the URL</p>;
+    return (
+      <p className="text-red-500 text-center">No email provided in the URL</p>
+    );
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen flex justify-center items-center">
+    <div className="bg-[#e6f0e6] min-h-screen flex justify-center items-center">
       <MatchProfile userEmail={email} />
     </div>
   );
 }
-
-
-
-
-

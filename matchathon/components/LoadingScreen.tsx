@@ -1,8 +1,10 @@
 "use client";
 
-import Lottie from "lottie-react";
 import loadingAnimation from "@/public/loading.json"; // Ensure it's in `/public`
 import { motion, AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
+
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 const LoadingScreen = () => {
   return (
@@ -16,7 +18,7 @@ const LoadingScreen = () => {
         <Lottie
           animationData={loadingAnimation}
           loop={true}
-          //className="w-[70vw] h-[70vh]" 
+          //className="w-[70vw] h-[70vh]"
           className="w-[900px] h-[900px]" // ⏩ Make it BIGGER
         />
       </motion.div>
