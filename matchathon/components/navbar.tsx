@@ -78,7 +78,7 @@ export const Navbar = () => {
         <NavItem href={`/message?email=${email}`} label="Tea Chat" icon={<MessageCircle size={20} />} badge={21} />
         <NavItem href={`/brew-crew?email=${email}`} label="Brew Crew" icon={<Coffee size={20} />} />
         <NavItem href={`/matchground?email=${email}`} label="Matchground" icon={<Users size={20} />} />
-        <NavItem href={`/hackathons?email=${email}`} label="Hackathon" icon={<Calendar size={20} />} />
+        <NavItem href={`/hackathon?email=${email}`} label="Hackathon" icon={<Calendar size={20} />} />
       </div>
 
       {/* 🔹 Logout Button */}
