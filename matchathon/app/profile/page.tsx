@@ -49,11 +49,11 @@ const ProfilePage = () => {
     <div className="flex h-screen bg-[#f1f9ef]">
       <Navbar />
       <div className="flex flex-col w-full items-center p-6">
-        <div className="w-3/4 bg-[#d9e8c5] p-6 rounded-xl shadow-lg flex items-center">
+        <div className="w-3/4 bg-white p-6 rounded-xl shadow-lg flex items-center">
           <img
             src={imageSrc}
             alt={user.firstName || "User"}
-            className="w-40 h-40 rounded-full border-4 border-[#b0c9a1] shadow-md mr-6"
+            className="w-40 h-40 rounded-full border-4 border-[#3e6247] shadow-md mr-6"
           />
           <div>
             <h2 className="text-[#3e6247] text-2xl font-semibold font-['Jua']">
@@ -74,7 +74,7 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        <div className="w-3/4 mt-6 p-6 bg-[#d9e8c5] rounded-xl shadow-md">
+        <div className="w-3/4 mt-6 p-6 bg-white rounded-xl shadow-md">
           <h3 className="text-2xl text-[#3e6247] font-bold">About Me</h3>
           <p className="text-[#5a7d5a] mt-2">
             {user.aboutMe || "No about me information available"}
@@ -82,14 +82,14 @@ const ProfilePage = () => {
         </div>
 
         <div className="w-3/4 grid grid-cols-2 gap-6 mt-6">
-          <div className="p-6 bg-[#d9e8c5] rounded-xl shadow-md">
+          <div className="p-6 bg-white rounded-xl shadow-md">
             <h3 className="text-lg text-[#3e6247] font-bold">Skills</h3>
             <div className="flex flex-wrap gap-2 mt-2">
               {user.skills?.length > 0 ? (
                 user.skills.map((skill, index) => (
                   <span
                     key={index}
-                    className="bg-[#89b489] px-3 py-1 rounded-xl text-sm text-white font-semibold"
+                    className="bg-red-200 px-3 py-1 rounded-xl text-sm font-semibold"
                   >
                     {skill}
                   </span>
@@ -100,14 +100,14 @@ const ProfilePage = () => {
             </div>
           </div>
 
-          <div className="p-6 bg-[#d9e8c5] rounded-xl shadow-md">
+          <div className="p-6 bg-white rounded-xl shadow-md">
             <h3 className="text-lg text-[#3e6247] font-bold">Interests</h3>
             <div className="flex flex-wrap gap-2 mt-2">
               {user.interests?.length > 0 ? (
                 user.interests.map((interest, index) => (
                   <span
                     key={index}
-                    className="bg-[#89b489] px-3 py-1 rounded-xl text-sm text-white font-semibold"
+                    className="bg-blue-200 px-3 py-1 rounded-xl text-sm  font-semibold"
                   >
                     {interest}
                   </span>
