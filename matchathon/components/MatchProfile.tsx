@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import { HeartIcon, XCircleIcon } from "@heroicons/react/24/outline";
@@ -25,39 +25,56 @@ const MatchProfile: React.FC<MatchProfileProps> = ({ userEmail }) => {
   const [overlappingHackathon, setOverlappingHackathon] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchMatch = async () => {
-      try {
-        // Step 1: Get the matched user's email from the backend
-        const response = await fetch(`http://localhost:5001/api/match/${userEmail}`);
-        const data = await response.json();
+  const fetchMatch = async () => {
+    try {
+      // Step 1: Get the matched user's email from the backend
+      const response = await fetch(`http://localhost:5001/api/match/${userEmail}`);
+      const data = await response.json();
 
-        if (data.message || !data.email) {
-          setError("No match found");
-          return;
-        }
-
-        // Step 2: Fetch the matched user's full details from MongoDB
-        const userResponse = await fetch(`http://localhost:5001/api/profile/${data.email}`);
-        const userData = await userResponse.json();
-
-        // Step 3: Fetch the logged-in user's hackathon list
-        const originalUserResponse = await fetch(`http://localhost:5001/api/profile/${userEmail}`);
-        const originalUserData = await originalUserResponse.json();
-        const originalHackathons = originalUserData.hacklist || [];
-
-        // Step 4: Find overlapping hackathons
-        const overlap = userData.hacklist.find((hack) => originalHackathons.includes(hack));
-
-        setMatch(userData);
-        setOverlappingHackathon(overlap || "No common hackathon found");
-      } catch (error) {
-        setError("Error fetching match data");
+      if (data.message || !data.email) {
+        setError("No match found");
+        return;
       }
-    };
 
+      // Step 2: Fetch the matched user's full details from MongoDB
+      const userResponse = await fetch(`http://localhost:5001/api/profile/${data.email}`);
+      const userData = await userResponse.json();
+
+      // Step 3: Fetch the logged-in user's hackathon list
+      const originalUserResponse = await fetch(`http://localhost:5001/api/profile/${userEmail}`);
+      const originalUserData = await originalUserResponse.json();
+      const originalHackathons = originalUserData.hacklist || [];
+
+      // Step 4: Find overlapping hackathons
+      const overlap = userData.hacklist.find((hack) => originalHackathons.includes(hack));
+
+      setMatch(userData);
+      setOverlappingHackathon(overlap || "No common hackathon found");
+    } catch (error) {
+      setError("Error fetching match data");
+    }
+  };
+
+  useEffect(() => {
     fetchMatch();
   }, [userEmail]);
+
+  const handleMatchAction = async (action: "like" | "dislike") => {
+    if (!match) return;
+
+    try {
+      await fetch("http://localhost:5001/api/match/action", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userEmail, matchedEmail: match.email, action }),
+      });
+
+      // Fetch next match after action
+      fetchMatch();
+    } catch (error) {
+      console.error("Error updating match:", error);
+    }
+  };
 
   if (error) {
     return <p className="text-red-500 text-center">{error}</p>;
@@ -117,10 +134,10 @@ const MatchProfile: React.FC<MatchProfileProps> = ({ userEmail }) => {
 
           {/* Buttons */}
           <div className="flex justify-between mt-5">
-            <button className="bg-red-100 p-3 rounded-full">
+            <button className="bg-red-100 p-3 rounded-full" onClick={() => handleMatchAction("dislike")}>
               <XCircleIcon className="w-8 h-8 text-red-600" />
             </button>
-            <button className="bg-green-100 p-3 rounded-full">
+            <button className="bg-green-100 p-3 rounded-full" onClick={() => handleMatchAction("like")}>
               <HeartIcon className="w-8 h-8 text-green-600" />
             </button>
           </div>
@@ -131,4 +148,3 @@ const MatchProfile: React.FC<MatchProfileProps> = ({ userEmail }) => {
 };
 
 export default MatchProfile;
-
