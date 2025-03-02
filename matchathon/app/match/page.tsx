@@ -13,9 +13,11 @@ export default function MatchPage() {
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen flex justify-center items-center">
+      <div className="flex justify-center items-center">
       <MatchProfile userEmail={email} />
     </div>
+    
+    
   );
 }
 
