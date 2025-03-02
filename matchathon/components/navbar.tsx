@@ -3,6 +3,14 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import {
+  User,
+  MessageCircle,
+  Coffee,
+  Users,
+  Calendar,
+  LogOut,
+} from "lucide-react";
 
 export const Navbar = () => {
   const [userEmail, setUserEmail] = useState<string | null>(null);
