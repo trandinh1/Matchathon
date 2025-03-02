@@ -1,0 +1,26 @@
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const { connectDB } = require("./db");
+
+// Import Routes
+const authRoutes = require("./routes/auth");
+const profileRoutes = require("./routes/profile");
+const hackathonRoutes = require("./routes/hackathon");
+
+const app = express();
+
+// Middleware
+app.use(express.json());
+app.use(cors());
+
+// Connect to MongoDB
+connectDB();
+
+// Routes
+app.use("/api/auth", authRoutes);
+app.use("/api/profile", profileRoutes);
+app.use("/api/hackathons", hackathonRoutes);
+
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
