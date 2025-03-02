@@ -39,7 +39,7 @@ router.post("/register", async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const passwordHash = await bcrypt.hash(password, salt);
 
-        // ✅ Include all profile fields in registration
+        // Include all profile fields in registration
         const newUser = {
             email,
             passwordHash,
