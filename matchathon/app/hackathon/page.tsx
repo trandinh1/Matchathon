@@ -20,7 +20,8 @@ export default function HackathonsPage() {
         const response = await fetch("http://localhost:5001/api/hackathon");
         const data = await response.json();
 
-        if (!response.ok) throw new Error(data.error || "Failed to fetch hackathons");
+        if (!response.ok)
+          throw new Error(data.error || "Failed to fetch hackathons");
 
         setHackathons(data);
       } catch (error: any) {
@@ -42,11 +43,14 @@ export default function HackathonsPage() {
     }
 
     try {
-      const response = await fetch("http://localhost:5001/api/hackathon/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ hackathonName, email: userEmail }),
-      });
+      const response = await fetch(
+        "http://localhost:5001/api/hackathon/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ hackathonName, email: userEmail }),
+        }
+      );
 
       const data = await response.json();
       if (!response.ok) throw new Error(data.msg || "Failed to register");
@@ -65,28 +69,40 @@ export default function HackathonsPage() {
   };
 
   if (error) return <p className="text-red-500 text-center">{error}</p>;
-  if (hackathons.length === 0) return <p className="text-gray-600 text-center">No hackathons available.</p>;
+  if (hackathons.length === 0)
+    return (
+      <p className="text-gray-600 text-center">No hackathons available.</p>
+    );
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col items-center">
-      <h2 className="text-3xl font-bold mt-6">Upcoming Hackathons</h2>
+    <div className="bg-[#f1f9ef] min-h-screen flex flex-col items-center p-6">
+      <h2 className="text-3xl font-bold text-[#5a7d5a] mt-6">
+        Upcoming Hackathons
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         {hackathons.map((hackathon) => (
-          <div key={hackathon.hackathonName} className="bg-white shadow-lg rounded-lg p-6 w-80 text-center">
-            <h3 className="text-xl font-bold">{hackathon.hackathonName}</h3>
-            <p className="text-gray-600">{hackathon.location}</p>
-            <p className="text-gray-500">📅 {hackathon.hackathonDate}</p>
-            
+          <div
+            key={hackathon.hackathonName}
+            className="bg-white shadow-md rounded-lg p-6 w-80 text-center border border-[#c8e6c9]"
+          >
+            <h3 className="text-xl font-bold text-[#3e6247]">
+              {hackathon.hackathonName}
+            </h3>
+            <p className="text-[#6b8c6b]">{hackathon.location}</p>
+            <p className="text-[#789b78]">📅 {hackathon.hackathonDate}</p>
+
             <button
-              className={`mt-4 w-full py-2 rounded-md shadow-md ${
+              className={`mt-4 w-full py-2 rounded-md shadow-md text-white font-semibold transition ${
                 hackathon.attendees.includes(userEmail || "")
-                  ? "bg-green-500 text-white cursor-not-allowed"
-                  : "bg-blue-500 text-white hover:bg-blue-600"
+                  ? "bg-[#7bb17e] cursor-not-allowed"
+                  : "bg-[#a3cfa3] hover:bg-[#89b489]"
               }`}
               onClick={() => handleRegister(hackathon.hackathonName)}
               disabled={hackathon.attendees.includes(userEmail || "")}
             >
-              {hackathon.attendees.includes(userEmail || "") ? "Already Attending" : "Attend"}
+              {hackathon.attendees.includes(userEmail || "")
+                ? "Already Attending"
+                : "Attend"}
             </button>
           </div>
         ))}
