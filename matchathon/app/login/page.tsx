@@ -21,9 +21,9 @@ const LoginPage = () => {
         });
   
         const data = await response.json();
-        if (!response.ok) throw new Error(data.message || "Login failed");
-  
-        router.push("/profile");
+        if (!response.ok) throw new Error(data.message);
+        
+        router.push(`/profile?email=${encodeURIComponent(email)}`);
       } catch (err: any) {
         setError(err.message);
       }
@@ -56,7 +56,7 @@ const LoginPage = () => {
                 required
               />
             </div>
-            <button type="submit" className="w-full bg-[#5D7B5D] text-white py-3 rounded-lg shadow-md">
+            <button type="submit" className="w-full bg-[#5D7B5D] text-white py-3 rounded-lg shadow-md hover:bg-green-300">
               Log In
             </button>
           </form>
