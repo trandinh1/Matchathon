@@ -16,7 +16,7 @@ const HackathonTabs = () => {
   useEffect(() => {
     const fetchAttendedHackathons = async () => {
       try {
-        const response = await fetch("http://localhost:5001/api/user-hackathons");
+        const response = await fetch("http://localhost:5001/api/hackathons");
         const data = await response.json();
         if (!response.ok) throw new Error("Failed to fetch hackathons");
         setAttendedHackathons(data);

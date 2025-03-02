@@ -24,7 +24,7 @@ connectDB();
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
-app.use("/api/hackathons", hackathonRoutes);
+app.use("/api/hackathon", hackathonRoutes);
 app.use("/api/match", matchRoutes);
 app.use("/api/team", teamRoutes);
 
