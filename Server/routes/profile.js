@@ -27,4 +27,35 @@ router.get("/:email", async (req, res) => {
     }
 });
 
+router.put("/update/:email", async (req, res) => {
+    try {
+        const db = getDB();
+        const { email } = req.params;
+        const updatedProfile = req.body;
+
+        // Ensure user exists
+        const existingUser = await db.collection("Users").findOne({ email });
+        if (!existingUser) return res.status(404).json({ msg: "User not found" });
+
+        // Update user profile
+        await db.collection("Users").updateOne(
+            { email },
+            { $set: updatedProfile }
+        );
+
+        res.json({ msg: "Profile updated successfully", updatedProfile });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 module.exports = router;
+
+// {
+//     "skills": ["React", "Node.js", "MongoDB"],
+//     "interests": ["Hackathons", "AI", "Startups"],
+//     "aboutMe": "I love building innovative projects!",
+//     "location": "Los Angeles, CA",
+//     "affiliatedWith": "University of Southern California",
+//     "linkedin": "https://linkedin.com/in/johndoe"
+// }
