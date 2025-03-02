@@ -19,7 +19,7 @@ export const Navbar = () => {
                       <Link href="/hackathons" className="text-2xl font-bold hover:text-gray-300">Hackathons</Link>  
                     </div>
                     <div className="w-[184px] h-12 p-3 rounded-[10px] justify-between items-center inline-flex bg-white">
-                       <Link href="/matchground" className="text-2xl font-bold hover:text-gray-300">MatchGround</Link> 
+                       <Link href="/match" className="text-2xl font-bold hover:text-gray-300">MatchGround</Link> 
                     </div>
                     <div className="w-[184px] h-12 p-3 rounded-[10px] justify-between items-center inline-flex bg-white">
                        <Link href="/messages" className="text-2xl font-bold hover:text-gray-300">Messages</Link>  

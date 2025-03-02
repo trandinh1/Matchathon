@@ -6,7 +6,7 @@ const client = new MongoClient(process.env.MONGO_URI);
 async function seedDatabase() {
     try {
         await client.connect();
-        console.log("✅ Connected to MongoDB Atlas");
+        console.log("Connected to MongoDB Atlas");
 
         const db = client.db("MatchathonDB"); // Change this if your DB name is different
 
@@ -61,13 +61,13 @@ async function seedDatabase() {
         await db.collection("hackathons").deleteMany({});
         await db.collection("hackathons").insertMany(hackathons);
 
-        console.log("✅ Dummy data inserted successfully!");
+        console.log(" Dummy data inserted successfully!");
 
     } catch (err) {
-        console.error("❌ Error inserting dummy data:", err);
+        console.error("Error inserting dummy data:", err);
     } finally {
         await client.close();
-        console.log("🔌 Database connection closed.");
+        console.log("Database connection closed.");
     }
 }
 

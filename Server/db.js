@@ -9,9 +9,9 @@ async function connectDB() {
     try {
         await client.connect();
         db = client.db("MatchathonDB"); // Change this if your database has a different name
-        console.log("✅ Connected to MongoDB Atlas");
+        console.log("Connected to MongoDB Atlas");
     } catch (err) {
-        console.error("❌ MongoDB connection error:", err);
+        console.error("MongoDB connection error:", err);
     }
 }
 
