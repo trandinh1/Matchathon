@@ -21,7 +21,7 @@ const LoginPage = () => {
         });
   
         const data = await response.json();
-        if (!response.ok) throw new Error(data.message || "Login failed");
+        if (!response.ok) throw new Error(data.message);
   
         router.push("/profile");
       } catch (err: any) {
