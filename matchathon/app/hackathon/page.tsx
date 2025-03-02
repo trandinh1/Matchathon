@@ -88,6 +88,10 @@ export default function HackathonsPage() {
             key={hackathon.hackathonName}
             className="bg-white shadow-md rounded-lg p-6 w-80 text-center border border-[#c8e6c9]"
           >
+            <img
+              src={hackathon.hackathonImage}
+              className="w-full h-35 object-fit rounded-md mb-4"
+            ></img>
             <h3 className="text-xl font-bold text-[#3e6247]">
               {hackathon.hackathonName}
             </h3>

@@ -18,7 +18,7 @@ const LoadingScreen = () => {
         <Lottie
           animationData={loadingAnimation}
           loop={true}
-          //className="w-[70vw] h-[70vh]" 
+          //className="w-[70vw] h-[70vh]"
           className="w-[900px] h-[900px]" // ⏩ Make it BIGGER
         />
       </motion.div>
