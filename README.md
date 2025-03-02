@@ -2,6 +2,7 @@
 
 ## Description
 
+Hi
 This project was created for the AthenaHacks hackathon. It aims to solve [describe the problem your project addresses] by [briefly describe your solution].
 
 ## Features
