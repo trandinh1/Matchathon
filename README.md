@@ -1,4 +1,4 @@
-# My AthenaHacks Project
+# Matchathon
 
 ## Description
 
