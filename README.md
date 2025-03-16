@@ -2,7 +2,7 @@
 
 ## Description
 
-Hi
+Welcome!
 This project was created for the AthenaHacks hackathon. While we all came in with unique and innovative project ideas, we struggled to form teams that complemented our skills, interests, and availability. There wasn’t an efficient way to find teammates who shared our vision while also bringing in diverse strengths. This frustration inspired us to create Matchathon—a web app designed specifically for hackathon team building. We wanted to build a platform that not only helps users find teammates based on skills and interests but also streamlines communication and hackathon management.
 
 ## Features
