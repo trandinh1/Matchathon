@@ -15,7 +15,7 @@ This project was created for the AthenaHacks hackathon. While we all came in wit
 
 ## How We Built It 
 We built Matchathon as a full-stack web app using: 
-- Frontend: React.js & Tailwind CSS for a modern and responsive UI.
+- Frontend: Next.js & Tailwind CSS for a modern and responsive UI.
 - Backend: Node.js & Express.js to handle authentication and team matching.
 - Database: MongoDB to store user profiles, hackathon events, and matches.
 - LLM: Google Gemini for making matches based on similar interests and compatible skills
